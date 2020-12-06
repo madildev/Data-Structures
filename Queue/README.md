@@ -14,7 +14,7 @@ The basic operations of the queue are:
 * Dequeue(Remove an element from the start of the queue)
 * Display(Prints the Queue)
 
-## Implementaions
+## Implementations
 The Queue can be implemented in number of ways using: 
 
 * Array 
