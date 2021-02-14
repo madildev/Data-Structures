@@ -1,21 +1,24 @@
 #include<iostream>
 using namespace std;
 
-int* BubbleSort(int arr[],int l)
+int* SelectionSort(int arr[],int l)
 {
 	int temp;
-	for(int i = 0; i<l ;i++)
-	{	
-		for(int j= i+1; j<l ;j++)
+	int min;
+	for(int i=0;i<l;i++)
+	{
+		min = i;
+		for(int j= i+1;j<l;j++)
 		{
-			if(arr[i] > arr[j])
+			if(arr[j] < arr[min])
 			{
-			   temp = arr[j];
-		       arr[j] = arr[i];
-		       arr[i] = temp; 
+				min = j;
 			}
 		}
-    }
+		temp = arr[i];
+		arr[i] = arr[min];
+		arr[min] = temp; 
+	}
 	return arr;
 }
 
@@ -36,7 +39,7 @@ int main()
 	}
 	cout<<"]";
 	
-	int *p = BubbleSort(arr,l);
+	int *p = SelectionSort(arr,l);
 	cout<<"\nThe Array after sorting is: ";
 	cout<<"[";
 	for(int i=0;i<=l;i++)

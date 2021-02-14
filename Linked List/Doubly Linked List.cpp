@@ -121,8 +121,8 @@ int main()
 	    cout<<"Press 1: Add Node At Start\n";
 	    cout<<"Press 2: Add Node At Any Location\n";
 	    cout<<"Press 3: Delete Node\n";
-	    cout<<"Press 5: Display Linked List\n";
-	    cout<<"Press 6: Exit\n";
+	    cout<<"Press 4: Display Linked List\n";
+	    cout<<"Press 5: Exit\n";
 	    cout<<"\nEnter Choice: ";
 	    cin>>choice;
 	    switch(choice)

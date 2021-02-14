@@ -12,6 +12,7 @@ class LinkedList{
 	    	head=NULL;
 	    	tail=NULL;
 		}
+		
 		Node* get_head()
 		{
 			return head;
@@ -19,11 +20,12 @@ class LinkedList{
 		
 		void Add_at_End(int value)
 		{
-			*temp=new node;
+			Node*temp = new Node;
 			temp->data=value;
 			temp->next=NULL;
 			if(head==NULL)
 			{
+				temp->next = head;
 				head=temp;
 			}
 			else
@@ -33,15 +35,17 @@ class LinkedList{
 				{
 					tail = tail->next;
 				}
-				tail->next=temp;
+				tail->next = temp;
+				temp->next = head;
 			}
+	    }
 		void Add_at_Any(int value,int pos)
 		{
 			Node* temp1=head;
 			Node* temp2=new Node;
 			for(int i=0;i<pos-1;i++)
 		    {
-					temp1=temp1->next;
+					temp1 = temp1->next;
 			}
 			if(pos==0)
 			{
@@ -60,12 +64,12 @@ class LinkedList{
 			Node* temp=new Node;
 			temp->data=value;
 			temp->next=head;
-			head=temp;
+			head = temp;
 			cout<<"\nNode Added Successfully At Start\n";
 		}
 		void Delete(int pos)
 		{
-			Node* temp1=head;
+			Node* temp1 = head;
 			Node* temp2;
 			for(int i=0;i<pos-1;i++)
 		    {
@@ -79,15 +83,15 @@ class LinkedList{
 			}
 			else if(temp1->next==tail)
 			{
-				temp2=temp1->next;
+				temp2 = temp1->next;
 				tail=temp1;
-				temp1->next=NULL;
+				temp1->next = head;
 				delete temp2;
 				cout<<"\nLast Node Deleted Successfully\n";
 			}
 			else
 			{
-		    	temp2=temp1->next;
+		    	temp2 = temp1->next;
 		    	temp1->next=temp2->next;
 		        delete temp2;
 		        cout<<"\nNode Deleted Successfully After Given Location\n";
@@ -98,12 +102,12 @@ class LinkedList{
 		{
 			Node* temp=new Node;
             temp=head;
-            while(temp!=NULL)
+            while(temp->next != head)
             {
                 cout<<temp->data<<" --> ";
                 temp=temp->next;
             }
-            cout<<"Null"<<endl;
+            cout<<temp->data;
 		}
 		
 };
