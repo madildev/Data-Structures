@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stack>
 using namespace std;
 struct Node{
 	int data;
@@ -7,19 +8,23 @@ struct Node{
 class LinkedList{
 	    Node *head,*tail;
 	public:
+		//Null Constructor
 	    LinkedList()
 	    {
 	    	head=NULL;
 	    	tail=NULL;
 		}
+		
+		//It returns the head of the linked list
 		Node* get_head()
 		{
 			return head;
 		}
 		
+		//Function add a node at end of the list
 		void Add_at_End(int value)
 		{
-			*temp=new node;
+			Node* temp=new Node;
 			temp->data=value;
 			temp->next=NULL;
 			if(head==NULL)
@@ -35,6 +40,8 @@ class LinkedList{
 				}
 				tail->next=temp;
 			}
+	    }
+		//Function add a node at a specific poistion in the list	
 		void Add_at_Any(int value,int pos)
 		{
 			Node* temp1=head;
@@ -55,6 +62,7 @@ class LinkedList{
 			    cout<<"\nNode Added Successfully After Given Position\n";
 		    }
 		}
+		//Function add a node at start of the list
 		void Add_at_Start(int value)
 		{
 			Node* temp=new Node;
@@ -63,6 +71,8 @@ class LinkedList{
 			head=temp;
 			cout<<"\nNode Added Successfully At Start\n";
 		}
+		
+		//Function to delete the nodes
 		void Delete(int pos)
 		{
 			Node* temp1=head;
@@ -94,6 +104,7 @@ class LinkedList{
 		    }
 		    
 		}
+		
 		void display()
 		{
 			Node* temp=new Node;
@@ -106,7 +117,30 @@ class LinkedList{
             cout<<"Null"<<endl;
 		}
 		
+		void ReverseLinkedList()
+		{
+			stack<struct Node*> S;
+			Node* temp = head;
+			while(temp != NULL)
+			{
+				S.push(temp);
+				temp = temp->next;
+			}
+			 
+			temp = S.top();
+			head = temp;
+			S.pop();
+			while(!S.empty())
+			{
+				temp->next = S.top();
+				S.pop();
+				temp = temp->next;
+			}
+			temp->next = NULL;
+		}
+		
 };
+
 int main()
 {
 	int choice,value,position;
@@ -144,6 +178,7 @@ int main()
 		    	cin>>position;
 				list.Delete(position);
 			    break;
+				
 		    case 4:
 		    	list.display();
 		    	cout<<endl;

@@ -1,47 +1,57 @@
 #include<iostream>
 using namespace std;
 
-int* SelectionSort(int arr[],int l)
+void quickSort(int list[],int first,int last)
 {
-	int temp;
-	for(int i = 0; i<l ;i++)
-	{	
-		for(int j= 0; j<l-i-1 ;j++)
+    int pivot,i,j,temp;
+
+    if(first < last)
+	{
+        pivot = first;
+        i = first;
+        j = last;
+
+        while(i < j)
 		{
-			if(arr[j] > arr[j+1])
+            while(list[i] <= list[pivot] && i < last)
+                i++;
+            while(list[j] > list[pivot])
+                j--;
+            if(i<j)
 			{
-			   temp = arr[j+1];
-		       arr[j+1] = arr[j];
-		       arr[j] = temp; 
-			}
-		}
+                temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
+        }
+        temp = list[pivot];
+        list[pivot] = list[j];
+        list[j] = temp;
+        quickSort(list,first,j-1);
+        quickSort(list,j+1,last);
     }
-	return arr;
 }
+
 
 int main()
 {
-	int arr[5];
-	int l = sizeof(arr)/sizeof(arr[0])-1;
-	cout<<"\nEnter the values into the array: ";
-	for(int i=0;i<=l;i++)
-	{
-		cin>>arr[i];
-	}
-	cout<<"\nThe Array before sorting is: ";
-	cout<<"[";
-	for(int i=0;i<=l;i++)
-	{
-		cout<<arr[i]<<" , ";
-	}
-	cout<<"]";
-	
-	int *p = SelectionSort(arr,l);
-	cout<<"\nThe Array after sorting is: ";
-	cout<<"[";
-	for(int i=0;i<=l;i++)
-	{
-		cout<<*(p+i) <<" , ";
-	}
-	cout<<"]";
+  int arr[5]={2,9,6,3,1};
+  int size=5,i;
+  
+  printf("List before sorting is: \n");
+  for(i = 0; i < size; i++)
+  {
+  	cout<<arr[i]<<" ";
+  }
+  
+  quickSort(list,0,size-1); 
+
+  printf("\nList after sorting is: \n");
+  for(i = 0; i < size; i++)
+  {
+  	cout<<arr[i]<<" ";
+  }
+
 }
+
+

@@ -1,50 +1,83 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int* SelectionSort(int arr[],int l)
+void merge(int arr[], int l, int m, int r)
 {
-	int temp;
-	int min;
-	for(int i=0;i<l;i++)
+	int n1 = m - l + 1;       //Size of the left sub-array
+	int n2 = r - m;           //Size for the right sub array
+	int L[n1], R[n2];        //The new arrays
+    
+    //This is filling the left array
+	for (int i = 0; i < n1; i++)
+		L[i] = arr[l + i];
+    //This is filling the right array
+	for (int j = 0; j < n2; j++)
+		R[j] = arr[m + 1 + j];
+
+	int i = 0;
+	int j = 0;
+	int k = l;
+
+    //This is sorting the arrays and combining them 
+	while (i < n1 && j < n2)
 	{
-		min = i;
-		for(int j= i+1;j<l;j++)
+		if (L[i] <= R[j])
 		{
-			if(arr[j] < arr[min])
-			{
-				min = j;
-			}
+			arr[k] = L[i];
+			i++;
 		}
-		temp = arr[i];
-		arr[i] = arr[min];
-		arr[min] = temp; 
+		else
+		{
+			arr[k] = R[j];
+			j++;
+		}
+		k++;
 	}
-	return arr;
+
+	while (i < n1)
+	{
+		arr[k] = L[i];
+		i++;
+		k++;
+	}
+
+	while (j < n2)
+	{
+		arr[k] = R[j];
+		j++;
+		k++;
+	}
+}
+
+void mergeSort(int arr[], int l, int r)
+{
+	if (l >= r)
+	{
+		return;
+	}
+	int m = l + (r - l) / 2;
+	mergeSort(arr, l, m);
+	mergeSort(arr, m + 1, r);
+	merge(arr, l, m, r);
+}
+
+void printArray(int A[], int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << A[i] << " ";
 }
 
 int main()
 {
-	int arr[5];
-	int l = sizeof(arr)/sizeof(arr[0])-1;
-	cout<<"\nEnter the values into the array: ";
-	for(int i=0;i<=l;i++)
-	{
-		cin>>arr[i];
-	}
-	cout<<"\nThe Array before sorting is: ";
-	cout<<"[";
-	for(int i=0;i<=l;i++)
-	{
-		cout<<arr[i]<<" , ";
-	}
-	cout<<"]";
-	
-	int *p = SelectionSort(arr,l);
-	cout<<"\nThe Array after sorting is: ";
-	cout<<"[";
-	for(int i=0;i<=l;i++)
-	{
-		cout<<*(p+i) <<" , ";
-	}
-	cout<<"]";
+	int arr[] = {12, 11, 13, 5, 6, 7};
+	int arr_size = sizeof(arr) / sizeof(arr[0]);
+
+	cout << "Given array is \n";
+	printArray(arr, arr_size);
+
+	mergeSort(arr, 0, arr_size - 1);
+
+	cout << "\nSorted array is \n";
+	printArray(arr, arr_size);
+	return 0;
 }
